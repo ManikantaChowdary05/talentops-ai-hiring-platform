@@ -86,6 +86,9 @@ pip install -r requirements.txt
 # Seed the database with the Demo dataset (Seed 20261022)
 python seed.py --mode demo
 
+# Only for a disposable database: explicitly drop and recreate all tables
+# python seed.py --mode demo --reset
+
 # Start the FastAPI backend server (port 8000)
 python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
@@ -111,15 +114,13 @@ Run the automated test suite covering all positive and negative business rules, 
 python -m pytest backend/tests
 ```
 
-**Test Results:**
-- `test_rules.py`: Validates R001, R003, R004, R006, R007, R008, R009, R010, R011 (10 passed)
-- `test_reproducibility.py`: Validates identical output generation across multiple runs with seed `20261022` (1 passed)
-- `test_api.py`: Validates REST API endpoints, auth, and analytics calculations (6 passed)
-- **Total: 17 Passed in 2.31 seconds**
+**Test reporting:** Run the command above in the current checkout to obtain the authoritative result for your environment. The repository does not treat a previously recorded test count as proof that the current commit passes.
+
+The reproducibility test generates two independent starter datasets and compares entity counts, ground-truth labels, and SHA-256 checksums of every generated table. Interview conflict validation calculates overlapping time windows for shared panel members rather than trusting a test marker. The generator creates baseline interviews only in slots present in every panel member's availability calendar; labelled anomaly fixtures are injected afterward.
 
 ---
 
-## 7. Automated 12-Check Data Quality & Integrity Report
+## 7. Automated 13-Check Data Quality & Integrity Report
 
 The platform includes an automated validation engine verifying:
 1. **Primary-Key Uniqueness**: Zero collisions across all entities.
