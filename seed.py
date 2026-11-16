@@ -4,15 +4,18 @@ from backend.synthetic.generator import generator
 from backend.synthetic.ground_truth import export_ground_truth
 from backend.synthetic.validator import DataQualityValidator
 
-def run_seed(mode: str = "demo"):
+def run_seed(mode: str = "demo", reset: bool = False):
     print(f"==================================================")
     print(f"TalentFlow 360 – Synthetic Seed Pipeline: {mode.upper()}")
     print(f"Seed: {generator.seed}")
     print(f"==================================================")
 
-    # Clean and re-create schema
-    Base.metadata.drop_all(bind=engine)
+    # Normal seeding is non-destructive. Destructive reset is opt-in.
     Base.metadata.create_all(bind=engine)
+    if reset:
+        print("WARNING: --reset requested; dropping all existing tables.")
+        Base.metadata.drop_all(bind=engine)
+        Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()
     try:
@@ -36,5 +39,10 @@ def run_seed(mode: str = "demo"):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TalentFlow 360 Deterministic Synthetic Data Pipeline")
     parser.add_argument("--mode", type=str, default="demo", choices=["starter", "demo", "full"])
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        help="Destructively drop and recreate all tables before seeding."
+    )
     args = parser.parse_args()
-    run_seed(args.mode)
+    run_seed(args.mode, reset=args.reset)
