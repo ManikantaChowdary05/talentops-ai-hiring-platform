@@ -516,9 +516,29 @@ class SyntheticDataGenerator:
             int_id = f"INT-2026-{idx:06d}"
             panel = panel_map.get(app.requisition_id, panels[0])
             
-            day_offset = random.randint(10, 45)
-            start_hour = random.choice([9, 11, 14, 16])
-            int_start = base_date + timedelta(days=day_offset, hours=start_hour)
+            # Allocate a conflict-free slot for every member of the panel.
+            int_start = None
+            for day_offset in range(10, 110):
+                for start_hour in [9, 11, 14, 16]:
+                    candidate_start = base_date + timedelta(days=day_offset, hours=start_hour)
+                    candidate_end = candidate_start + timedelta(hours=1)
+                    overlaps = any(
+                        existing.status != "Cancelled"
+                        and existing.panel
+                        and set(member.user_id for member in panel.members).intersection(
+                            member.user_id for member in existing.panel.members
+                        )
+                        and candidate_start < existing.scheduled_end
+                        and candidate_end > existing.scheduled_start
+                        for existing in interviews
+                    )
+                    if not overlaps:
+                        int_start = candidate_start
+                        break
+                if int_start is not None:
+                    break
+            if int_start is None:
+                raise RuntimeError("Unable to allocate a conflict-free interview slot")
             int_end = int_start + timedelta(hours=1)
             
             status = "Completed" if app.current_stage in ["Offer", "Hired"] else "Scheduled"
@@ -687,8 +707,19 @@ class SyntheticDataGenerator:
         if len(applications) > 5:
             target_app = applications[1]
             old_stage = target_app.current_stage
-            target_app.current_stage = "Offer"  # skipped intermediate technical evaluation!
-            
+            target_app.current_stage = "Offer"  # deliberately injected R003 violation
+            target_app.updated_at = datetime(2026, 2, 1, 12, 0, 0)
+            db.add(ApplicationStageHistory(
+                application_id=target_app.application_id,
+                previous_stage=old_stage,
+                new_stage="Offer",
+                decision="BLOCK",
+                decision_reason="Ground-truth anomaly: attempted stage skip without required reviews (R003)",
+                actor="Synthetic Anomaly Injector",
+                timestamp=datetime(2026, 2, 1, 12, 0, 0),
+                related_rule_id="R003"
+            ))
+
             exc_id = f"EXC-2026-{exc_counter:06d}"
             exc_counter += 1
             exc = ExceptionLog(
@@ -702,7 +733,7 @@ class SyntheticDataGenerator:
                 actual_decision="ADVANCED",
                 resolution_status="Open",
                 comments="Candidate progressed directly to Offer without completing required Technical Interview scorecards.",
-                created_at=datetime.utcnow() - timedelta(days=2)
+                created_at=datetime(2026, 2, 1, 10, 0, 0)
             )
             db.add(exc)
             exceptions.append(exc)
@@ -722,7 +753,8 @@ class SyntheticDataGenerator:
         if len(interviews) > 2:
             intv_a = interviews[0]
             intv_b = interviews[1]
-            # Force intv_b to overlap intv_a
+            # Share the same panel so the overlapping booking is a real conflict.
+            intv_b.panel_id = intv_a.panel_id
             intv_b.scheduled_start = intv_a.scheduled_start
             intv_b.scheduled_end = intv_a.scheduled_end
             intv_b.test_mode_conflict = True
@@ -740,7 +772,7 @@ class SyntheticDataGenerator:
                 actual_decision="SCHEDULED",
                 resolution_status="Open",
                 comments=f"Interviewer double-booked between {intv_a.interview_id} and {intv_b.interview_id} at {intv_a.scheduled_start}.",
-                created_at=datetime.utcnow() - timedelta(days=1)
+                created_at=datetime(2026, 2, 1, 11, 0, 0)
             )
             db.add(exc)
             exceptions.append(exc)
@@ -777,7 +809,7 @@ class SyntheticDataGenerator:
                 actual_decision="APPROVED",
                 resolution_status="Open",
                 comments=f"Proposed salary (${target_offer.proposed_salary:,.0f}) exceeds approved band max (${req.salary_max:,.0f}) by 40% without Level 2 exception approval.",
-                created_at=datetime.utcnow() - timedelta(hours=18)
+                created_at=datetime(2026, 2, 1, 12, 0, 0)
             )
             db.add(exc)
             exceptions.append(exc)
@@ -796,8 +828,20 @@ class SyntheticDataGenerator:
         # Anomaly 4: Withdrawn candidate remains scheduled (R004)
         if len(applications) > 3 and len(interviews) > 3:
             withdrawn_app = applications[3]
+            previous_stage = withdrawn_app.current_stage
             withdrawn_app.current_stage = "Withdrawn"
             withdrawn_app.application_status = "Inactive"
+            withdrawn_app.updated_at = datetime(2026, 2, 2, 12, 0, 0)
+            db.add(ApplicationStageHistory(
+                application_id=withdrawn_app.application_id,
+                previous_stage=previous_stage,
+                new_stage="Withdrawn",
+                decision="WITHDRAW",
+                decision_reason="Ground-truth anomaly fixture: withdrawal recorded while calendar booking remains",
+                actor="Synthetic Anomaly Injector",
+                timestamp=datetime(2026, 2, 2, 12, 0, 0),
+                related_rule_id="R004"
+            ))
 
             scheduled_int = interviews[2]
             scheduled_int.application_id = withdrawn_app.application_id
@@ -816,7 +860,7 @@ class SyntheticDataGenerator:
                 actual_decision="SCHEDULED",
                 resolution_status="Open",
                 comments=f"Candidate {withdrawn_app.candidate_id} withdrew application {withdrawn_app.application_id}, but interview {scheduled_int.interview_id} remains active on calendar.",
-                created_at=datetime.utcnow() - timedelta(hours=10)
+                created_at=datetime(2026, 2, 2, 12, 0, 0)
             )
             db.add(exc)
             exceptions.append(exc)
@@ -835,6 +879,10 @@ class SyntheticDataGenerator:
         # Anomaly 5: Evaluation includes irrelevant criteria (R008)
         if len(scorecards) > 1:
             target_sc = scorecards[0]
+            target_sc.feedback_comments = (
+                (target_sc.feedback_comments or "").rstrip()
+                + " | Unapproved criteria: candidate_hobbies"
+            )
             exc_id = f"EXC-2026-{exc_counter:06d}"
             exc_counter += 1
             exc = ExceptionLog(
@@ -848,7 +896,7 @@ class SyntheticDataGenerator:
                 actual_decision="SUBMITTED",
                 resolution_status="Open",
                 comments="Evaluation scorecard contained unapproved criteria ('Candidate personal hobbies and social background') violating anti-bias policy.",
-                created_at=datetime.utcnow() - timedelta(hours=6)
+                created_at=datetime(2026, 2, 2, 13, 0, 0)
             )
             db.add(exc)
             exceptions.append(exc)
