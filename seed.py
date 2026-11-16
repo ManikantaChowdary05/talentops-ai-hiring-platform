@@ -3,6 +3,7 @@ from backend.app.core.database import SessionLocal, Base, engine
 from backend.synthetic.generator import generator
 from backend.synthetic.ground_truth import export_ground_truth
 from backend.synthetic.validator import DataQualityValidator
+from backend.app.models.entities import User
 
 def run_seed(mode: str = "demo", reset: bool = False):
     print(f"==================================================")
@@ -19,6 +20,11 @@ def run_seed(mode: str = "demo", reset: bool = False):
 
     db = SessionLocal()
     try:
+        if not reset and db.query(User).count() > 0:
+            raise RuntimeError(
+                "Database already contains TalentFlow data. No changes were made. "
+                "Use --reset only with a disposable database to replace its contents."
+            )
         summary = generator.generate_all(db, mode=mode)
         print("Data generation complete! Entity counts:")
         for k, v in summary["counts"].items():
