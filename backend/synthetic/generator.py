@@ -724,7 +724,7 @@ class SyntheticDataGenerator:
 
         # Anomaly 1: Candidate moves forward without required review (R003)
         if len(applications) > 5:
-            target_app = applications[1]
+            target_app = next((app for app in applications if app.current_stage not in ["Offer", "Hired", "Rejected", "Withdrawn"]), applications[1])
             old_stage = target_app.current_stage
             target_app.current_stage = "Offer"  # deliberately injected R003 violation
             target_app.updated_at = datetime(2026, 2, 1, 12, 0, 0)
@@ -846,7 +846,7 @@ class SyntheticDataGenerator:
 
         # Anomaly 4: Withdrawn candidate remains scheduled (R004)
         if len(applications) > 3 and len(interviews) > 3:
-            withdrawn_app = applications[3]
+            withdrawn_app = next((app for app in applications if app.current_stage != "Withdrawn"), applications[3])
             previous_stage = withdrawn_app.current_stage
             withdrawn_app.current_stage = "Withdrawn"
             withdrawn_app.application_status = "Inactive"
