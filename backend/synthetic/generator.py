@@ -475,7 +475,7 @@ class SyntheticDataGenerator:
         interviewers = [u for u in users if u.role in ["Interviewer", "Hiring Manager"]]
         
         # 14 days of slots
-        for day_offset in range(1, 20):
+        for day_offset in range(1, 120):
             current_day = (base_date + timedelta(days=day_offset)).strftime("%Y-%m-%d")
             for u in interviewers:
                 for slot_hour in [9, 11, 14, 16]:
@@ -495,7 +495,7 @@ class SyntheticDataGenerator:
         return availabilities
 
     def _generate_interviews_and_scorecards(
-        self, db: Session, applications: List[Application], panels: List[InterviewPanel], 
+        self, db: Session, applications: List[Application], panels: List[InterviewPanel],
         users: List[User], n_ints: int, base_date: datetime
     ):
         interviews = []
@@ -522,18 +522,37 @@ class SyntheticDataGenerator:
                 for start_hour in [9, 11, 14, 16]:
                     candidate_start = base_date + timedelta(days=day_offset, hours=start_hour)
                     candidate_end = candidate_start + timedelta(hours=1)
+                    panel_member_ids = {member.user_id for member in panel.members}
                     overlaps = any(
                         existing.status != "Cancelled"
                         and existing.panel
-                        and set(member.user_id for member in panel.members).intersection(
+                        and panel_member_ids.intersection(
                             member.user_id for member in existing.panel.members
                         )
                         and candidate_start < existing.scheduled_end
                         and candidate_end > existing.scheduled_start
                         for existing in interviews
                     )
-                    if not overlaps:
+                    slot_date = candidate_start.strftime("%Y-%m-%d")
+                    slot_start = candidate_start.strftime("%H:%M")
+                    slot_end = candidate_end.strftime("%H:%M")
+                    available_member_ids = {
+                        slot.user_id for slot in db.query(Availability).filter(
+                            Availability.date == slot_date,
+                            Availability.start_time == slot_start,
+                            Availability.end_time == slot_end,
+                            Availability.is_booked == False
+                        ).all()
+                    }
+                    if not overlaps and panel_member_ids.issubset(available_member_ids):
                         int_start = candidate_start
+                        for slot in db.query(Availability).filter(
+                            Availability.user_id.in_(panel_member_ids),
+                            Availability.date == slot_date,
+                            Availability.start_time == slot_start,
+                            Availability.end_time == slot_end
+                        ).all():
+                            slot.is_booked = True
                         break
                 if int_start is not None:
                     break
