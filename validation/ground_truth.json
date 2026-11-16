@@ -1,0 +1,152 @@
+[
+  {
+    "record_id": "EXC-2026-000001",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000183-REQ-2026-000003",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000002",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000162-REQ-2026-000002",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000003",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000217-REQ-2026-000006",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000004",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000141-REQ-2026-000003",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000005",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000116-REQ-2026-000005",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000006",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000228-REQ-2026-000008",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000007",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000242-REQ-2026-000004",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000008",
+    "entity_type": "Application",
+    "entity_id": "APP-CAND-000140-REQ-2026-000003",
+    "issue_type": "Candidate moves forward without required review",
+    "expected_classification": "CRITICAL_ANOMALY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R003",
+    "scenario_description": "Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage."
+  },
+  {
+    "record_id": "EXC-2026-000009",
+    "entity_type": "Interview",
+    "entity_id": "INT-2026-000002",
+    "issue_type": "Interviewer double-booked",
+    "expected_classification": "SCHEDULE_CONFLICT",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R006",
+    "scenario_description": "Interview overlaps a concurrent panel assignment and violates the non-overlap constraint."
+  },
+  {
+    "record_id": "EXC-2026-000010",
+    "entity_type": "Interview",
+    "entity_id": "INT-2026-000004",
+    "issue_type": "Interviewer double-booked",
+    "expected_classification": "SCHEDULE_CONFLICT",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R006",
+    "scenario_description": "Interview overlaps a concurrent panel assignment and violates the non-overlap constraint."
+  },
+  {
+    "record_id": "EXC-2026-000011",
+    "entity_type": "Offer",
+    "entity_id": "OFF-2026-000001",
+    "issue_type": "Offer exceeds approved compensation band",
+    "expected_classification": "BUDGET_OVERRUN",
+    "expected_decision": "REVIEW",
+    "applicable_rule_id": "R009",
+    "scenario_description": "Compensation exceeded the requisition maximum without exception approval."
+  },
+  {
+    "record_id": "EXC-2026-000012",
+    "entity_type": "Interview",
+    "entity_id": "INT-2026-000005",
+    "issue_type": "Withdrawn candidate remains scheduled",
+    "expected_classification": "LIFECYCLE_INCONSISTENCY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R004",
+    "scenario_description": "An application marked Withdrawn remains attached to an active interview."
+  },
+  {
+    "record_id": "EXC-2026-000013",
+    "entity_type": "Interview",
+    "entity_id": "INT-2026-000006",
+    "issue_type": "Withdrawn candidate remains scheduled",
+    "expected_classification": "LIFECYCLE_INCONSISTENCY",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R004",
+    "scenario_description": "An application marked Withdrawn remains attached to an active interview."
+  },
+  {
+    "record_id": "EXC-2026-000014",
+    "entity_type": "Evaluation",
+    "entity_id": "SCORE-INT-2026-000004-USR-000007",
+    "issue_type": "Evaluation includes irrelevant criteria",
+    "expected_classification": "POLICY_VIOLATION",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R008",
+    "scenario_description": "An interviewer added an unapproved personal criterion outside the five authorized dimensions."
+  },
+  {
+    "record_id": "EXC-2026-000015",
+    "entity_type": "Evaluation",
+    "entity_id": "SCORE-INT-2026-000004-USR-000015",
+    "issue_type": "Evaluation includes irrelevant criteria",
+    "expected_classification": "POLICY_VIOLATION",
+    "expected_decision": "BLOCK",
+    "applicable_rule_id": "R008",
+    "scenario_description": "An interviewer added an unapproved personal criterion outside the five authorized dimensions."
+  }
+]

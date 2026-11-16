@@ -1,0 +1,16 @@
+record_id,entity_type,entity_id,issue_type,expected_classification,expected_decision,applicable_rule_id,scenario_description
+EXC-2026-000001,Application,APP-CAND-000183-REQ-2026-000003,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000002,Application,APP-CAND-000162-REQ-2026-000002,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000003,Application,APP-CAND-000217-REQ-2026-000006,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000004,Application,APP-CAND-000141-REQ-2026-000003,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000005,Application,APP-CAND-000116-REQ-2026-000005,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000006,Application,APP-CAND-000228-REQ-2026-000008,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000007,Application,APP-CAND-000242-REQ-2026-000004,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000008,Application,APP-CAND-000140-REQ-2026-000003,Candidate moves forward without required review,CRITICAL_ANOMALY,BLOCK,R003,Candidate bypassed mandatory technical scorecard reviews and advanced straight to Offer stage.
+EXC-2026-000009,Interview,INT-2026-000002,Interviewer double-booked,SCHEDULE_CONFLICT,BLOCK,R006,Interview overlaps a concurrent panel assignment and violates the non-overlap constraint.
+EXC-2026-000010,Interview,INT-2026-000004,Interviewer double-booked,SCHEDULE_CONFLICT,BLOCK,R006,Interview overlaps a concurrent panel assignment and violates the non-overlap constraint.
+EXC-2026-000011,Offer,OFF-2026-000001,Offer exceeds approved compensation band,BUDGET_OVERRUN,REVIEW,R009,Compensation exceeded the requisition maximum without exception approval.
+EXC-2026-000012,Interview,INT-2026-000005,Withdrawn candidate remains scheduled,LIFECYCLE_INCONSISTENCY,BLOCK,R004,An application marked Withdrawn remains attached to an active interview.
+EXC-2026-000013,Interview,INT-2026-000006,Withdrawn candidate remains scheduled,LIFECYCLE_INCONSISTENCY,BLOCK,R004,An application marked Withdrawn remains attached to an active interview.
+EXC-2026-000014,Evaluation,SCORE-INT-2026-000004-USR-000007,Evaluation includes irrelevant criteria,POLICY_VIOLATION,BLOCK,R008,An interviewer added an unapproved personal criterion outside the five authorized dimensions.
+EXC-2026-000015,Evaluation,SCORE-INT-2026-000004-USR-000015,Evaluation includes irrelevant criteria,POLICY_VIOLATION,BLOCK,R008,An interviewer added an unapproved personal criterion outside the five authorized dimensions.

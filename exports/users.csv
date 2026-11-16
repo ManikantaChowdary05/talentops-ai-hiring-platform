@@ -1,0 +1,17 @@
+user_id,username,email,password_hash,full_name,role,department,is_active,created_at
+USR-000001,admin,admin@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Admin User,System Administrator,Executive,True,2026-01-10T09:00:00
+USR-000002,hr_lead,hr.lead@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Sarah Jenkins,HR Partner,HR & Operations,True,2026-01-10T09:00:00
+USR-000003,hr_specialist,hr.specialist@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Michael Chang,HR Partner,HR & Operations,True,2026-01-10T09:00:00
+USR-000004,mgr_engineering,mgr.eng@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Elena Rostova,Hiring Manager,Engineering,True,2026-01-10T09:00:00
+USR-000005,mgr_data,mgr.data@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,David Patel,Hiring Manager,Data & AI,True,2026-01-10T09:00:00
+USR-000006,mgr_product,mgr.pm@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Rachel Miller,Hiring Manager,Product Management,True,2026-01-10T09:00:00
+USR-000007,interviewer_tech1,tech1@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Alex Thorne,Interviewer,Engineering,True,2026-01-10T09:00:00
+USR-000008,interviewer_tech2,tech2@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Priya Sharma,Interviewer,Engineering,True,2026-01-10T09:00:00
+USR-000009,interviewer_data,data.int@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Liam Vance,Interviewer,Data & AI,True,2026-01-10T09:00:00
+USR-000010,ops_lead,ops@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Jordan Reed,IT / Operations Partner,IT & Ops,True,2026-01-10T09:00:00
+USR-000011,cand_user,cand@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Demo Candidate,Employee / Candidate,Engineering,True,2026-01-10T09:00:00
+USR-000012,user_12,user_12@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Lauren Nash,Interviewer,Engineering,True,2026-01-10T09:00:00
+USR-000013,user_13,user_13@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Rodney Hall,Interviewer,Data & AI,True,2026-01-10T09:00:00
+USR-000014,user_14,user_14@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Roger Anderson,Hiring Manager,Design,True,2026-01-10T09:00:00
+USR-000015,user_15,user_15@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Eric Miles,Hiring Manager,DevOps & Cloud,True,2026-01-10T09:00:00
+USR-000016,user_16,user_16@talentflow360.io,ae1d0f481966737c53cb5e753857578c5c160a5f7e6bdda6c219885404405a16,Ashley Lee,Interviewer,Engineering,True,2026-01-10T09:00:00

@@ -1,0 +1,6 @@
+manager_id,user_id,department,title,max_approval_level,created_at
+MGR-000001,USR-000004,Engineering,Engineering Director,2,2026-01-10T09:00:00
+MGR-000002,USR-000005,Data & AI,Head of Data & AI,2,2026-01-10T09:00:00
+MGR-000003,USR-000006,Product Management,Head of Product Management,2,2026-01-10T09:00:00
+MGR-000004,USR-000014,Design,Director of Design,1,2026-01-10T09:00:00
+MGR-000005,USR-000015,DevOps & Cloud,Head of Infrastructure,1,2026-01-10T09:00:00

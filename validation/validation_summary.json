@@ -1,0 +1,128 @@
+{
+  "validation_timestamp": "2026-11-16T09:24:16.910070",
+  "total_checks": 14,
+  "passed_checks": 9,
+  "failed_checks": 0,
+  "anomalies_flagged": 5,
+  "baseline_checks": 9,
+  "overall_integrity_score": 100.0,
+  "anomaly_detection": {
+    "detected": 15,
+    "injected": 15,
+    "summary": "detected 15 of 15 injected"
+  },
+  "checks": [
+    {
+      "check_name": "Primary-Key Uniqueness",
+      "category": "Schema Integrity",
+      "status": "PASS",
+      "details": "Evaluated 676 entity IDs across Users, Requisitions, Candidates, and Applications.",
+      "records_evaluated": 676,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Foreign-Key Integrity",
+      "category": "Relational Integrity",
+      "status": "PASS",
+      "details": "Zero orphaned application foreign keys detected across 400 records.",
+      "records_evaluated": 400,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Allowed Enumeration Values",
+      "category": "Domain Constraints",
+      "status": "PASS",
+      "details": "All requisition statuses and candidate stages comply strictly with enumerated domain models.",
+      "records_evaluated": 410,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Date and Range Ordering",
+      "category": "Temporal Logic",
+      "status": "PASS",
+      "details": "Checked range constraints on salaries, experiences, and interview timelines across 110 records.",
+      "records_evaluated": 110,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Salary-Band Validation (R009)",
+      "category": "Business Rule Compliance",
+      "status": "ANOMALY_DETECTED",
+      "details": "Identified 1 offers exceeding requisition maximum band (Labelled Anomaly R009).",
+      "records_evaluated": 61,
+      "violations_found": 1
+    },
+    {
+      "check_name": "Interview Conflict Validation (R006)",
+      "category": "Scheduling Protections",
+      "status": "ANOMALY_DETECTED",
+      "details": "Conflict inspector detected 2 labelled test conflicts out of 100 scheduled interviews.",
+      "records_evaluated": 100,
+      "violations_found": 2
+    },
+    {
+      "check_name": "Application Lifecycle Validation (R004)",
+      "category": "Workflow Integrity",
+      "status": "ANOMALY_DETECTED",
+      "details": "Detected 2 active interviews belonging to Withdrawn candidates (Labelled Anomaly R004).",
+      "records_evaluated": 100,
+      "violations_found": 2
+    },
+    {
+      "check_name": "Required Review Before Offer (R003)",
+      "category": "Workflow Integrity",
+      "status": "ANOMALY_DETECTED",
+      "details": "Detected 8 applications advanced to Offer without an Offer stage-history review.",
+      "records_evaluated": 44,
+      "violations_found": 8
+    },
+    {
+      "check_name": "Evaluation Criteria Relevance (R008)",
+      "category": "Evaluation Quality",
+      "status": "ANOMALY_DETECTED",
+      "details": "Detected 2 scorecards containing criteria outside the approved rubric.",
+      "records_evaluated": 105,
+      "violations_found": 2
+    },
+    {
+      "check_name": "Scorecard Completeness (R007)",
+      "category": "Evaluation Quality",
+      "status": "PASS",
+      "details": "Validated completeness across 105 evaluation scorecards; all 5 dimensions scored 1-5.",
+      "records_evaluated": 105,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Weighted Score Calculation (R007 Formula)",
+      "category": "Mathematical Precision",
+      "status": "PASS",
+      "details": "Verified weighted score formula SUM(crit*weight)/5*100 across 105 scorecards.",
+      "records_evaluated": 105,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Approval Consistency (R011)",
+      "category": "Governance Compliance",
+      "status": "PASS",
+      "details": "Verified all accepted offers have corresponding approved signatures.",
+      "records_evaluated": 61,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Duplicate Record Detection",
+      "category": "Deduplication",
+      "status": "PASS",
+      "details": "Evaluated 250 candidate emails with zero duplicates detected.",
+      "records_evaluated": 250,
+      "violations_found": 0
+    },
+    {
+      "check_name": "Fixed-Seed Reproducibility",
+      "category": "Determinism",
+      "status": "PASS",
+      "details": "Deterministic pseudo-random state verified against seed 20261022.",
+      "records_evaluated": 1,
+      "violations_found": 0
+    }
+  ]
+}

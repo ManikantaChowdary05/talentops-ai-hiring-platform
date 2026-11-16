@@ -1,0 +1,15 @@
+check_name,category,status,details,records_evaluated,violations_found
+Primary-Key Uniqueness,Schema Integrity,PASS,"Evaluated 676 entity IDs across Users, Requisitions, Candidates, and Applications.",676,0
+Foreign-Key Integrity,Relational Integrity,PASS,Zero orphaned application foreign keys detected across 400 records.,400,0
+Allowed Enumeration Values,Domain Constraints,PASS,All requisition statuses and candidate stages comply strictly with enumerated domain models.,410,0
+Date and Range Ordering,Temporal Logic,PASS,"Checked range constraints on salaries, experiences, and interview timelines across 110 records.",110,0
+Salary-Band Validation (R009),Business Rule Compliance,ANOMALY_DETECTED,Identified 1 offers exceeding requisition maximum band (Labelled Anomaly R009).,61,1
+Interview Conflict Validation (R006),Scheduling Protections,ANOMALY_DETECTED,Conflict inspector detected 2 labelled test conflicts out of 100 scheduled interviews.,100,2
+Application Lifecycle Validation (R004),Workflow Integrity,ANOMALY_DETECTED,Detected 2 active interviews belonging to Withdrawn candidates (Labelled Anomaly R004).,100,2
+Required Review Before Offer (R003),Workflow Integrity,ANOMALY_DETECTED,Detected 8 applications advanced to Offer without an Offer stage-history review.,44,8
+Evaluation Criteria Relevance (R008),Evaluation Quality,ANOMALY_DETECTED,Detected 2 scorecards containing criteria outside the approved rubric.,105,2
+Scorecard Completeness (R007),Evaluation Quality,PASS,Validated completeness across 105 evaluation scorecards; all 5 dimensions scored 1-5.,105,0
+Weighted Score Calculation (R007 Formula),Mathematical Precision,PASS,Verified weighted score formula SUM(crit*weight)/5*100 across 105 scorecards.,105,0
+Approval Consistency (R011),Governance Compliance,PASS,Verified all accepted offers have corresponding approved signatures.,61,0
+Duplicate Record Detection,Deduplication,PASS,Evaluated 250 candidate emails with zero duplicates detected.,250,0
+Fixed-Seed Reproducibility,Determinism,PASS,Deterministic pseudo-random state verified against seed 20261022.,1,0

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./talentflow360.db
+      - SYNTHETIC_SEED=20261022
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./talentflow360.db:/app/talentflow360.db
+      - ./validation:/app/validation
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend

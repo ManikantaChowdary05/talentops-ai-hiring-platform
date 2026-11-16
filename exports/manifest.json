@@ -1,0 +1,121 @@
+{
+  "source": {
+    "generator": "backend.synthetic.generator.SyntheticDataGenerator",
+    "seed": 20261022,
+    "mode": "full"
+  },
+  "tables": {
+    "application_stage_history": {
+      "row_count": 26715,
+      "sha256": "e72c1ee0519bacd7a0dc3818504d8236581c07ae74439e1c4b2ff394cfe19e39",
+      "csv": "application_stage_history.csv",
+      "csv_sha256": "c2116f963a48494803fa9435b97b71d275824ff1a74067f36b638a18e70a2554"
+    },
+    "applications": {
+      "row_count": 8000,
+      "sha256": "35f7285cb051c9c19c8ff973e338692324ab4525a04a03fd4c6e1cdd6882a27a",
+      "csv": "applications.csv",
+      "csv_sha256": "2814ca0033cd2f8853fe2b44d464b510edf67c59437fe550cde2e574ebbff364"
+    },
+    "approvals": {
+      "row_count": 1407,
+      "sha256": "c33ae308cf2e631688657cc1db6bd6aefcdad9a582bc6144dee3df58d00a935e",
+      "csv": "approvals.csv",
+      "csv_sha256": "699a79718c078b00276e498dff42fe9c27505104655400c081730c902fe59308"
+    },
+    "audit_logs": {
+      "row_count": 8025,
+      "sha256": "67505dcca0c6196c35865c3d9450ea0e7b3ac8a9d3ef040978bea86c14a47da7",
+      "csv": "audit_logs.csv",
+      "csv_sha256": "7a1954f992f8b7954637da84413b628107fb98212635d8e9fc97780fa82fff5d"
+    },
+    "availabilities": {
+      "row_count": 836,
+      "sha256": "08ba60fba6345e74f7f1ae98e0f89176fcb2f0f69c4464cb784bdf521fd6922d",
+      "csv": "availabilities.csv",
+      "csv_sha256": "e4492482ac5f35b1721159fa8618a0bad072a8f7a59b5386a33dbd93c23afa64"
+    },
+    "candidate_skills": {
+      "row_count": 27552,
+      "sha256": "56cdffc8c48e743fa68cee47fe55cf1dbaf50d7633f4345a94e37cc18cb88020",
+      "csv": "candidate_skills.csv",
+      "csv_sha256": "f9286cafd952463f4124f5c587b67da193235f8ca2ab1043a472bb33f30123d1"
+    },
+    "candidates": {
+      "row_count": 5000,
+      "sha256": "6af3b186877182e9ead6f9b5ff7521f21b43adc19e1c96cca307f08e875708c6",
+      "csv": "candidates.csv",
+      "csv_sha256": "d722986d740de4ad2c3025569901053df700ef3f575a134fd0c758da84d285d7"
+    },
+    "exception_logs": {
+      "row_count": 292,
+      "sha256": "8691c526f61f5d2880dd6c305b784b789e83ab2825613ac7882e45ee190f6e2b",
+      "csv": "exception_logs.csv",
+      "csv_sha256": "c850d037f4e10165503398315db315f27409b0e03acc4011630c96395d81e2e1"
+    },
+    "hiring_managers": {
+      "row_count": 5,
+      "sha256": "148a4f80d655323b46ef534e4e29ccd740cec432cd034fe0fa0f4b0e2f47b379",
+      "csv": "hiring_managers.csv",
+      "csv_sha256": "702fa2d35dcab95b2563a7e3a74b4eabc0149a6d5c5eb251c140c313077d23d9"
+    },
+    "interview_panels": {
+      "row_count": 200,
+      "sha256": "02c9f044ce25a7d1434e19a29c8bbb5cd41ff20f202f240957b7ec7759a6bc57",
+      "csv": "interview_panels.csv",
+      "csv_sha256": "54697262a2ddd5663f473a8e4f387e516b3f4fe305689418a422e963c3b861ff"
+    },
+    "interviews": {
+      "row_count": 2000,
+      "sha256": "d851a0d8c89b048e647362462431235b30d9e639f39c2ebe7ad7751c476e6096",
+      "csv": "interviews.csv",
+      "csv_sha256": "1a62bbf4688f8f2df2c6692e0d464c68ff6b806ea7da7cfcbd908d2db852ef71"
+    },
+    "notifications": {
+      "row_count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "csv": "notifications.csv",
+      "csv_sha256": "ab9a522c96e577ffbe7b71717c6f3ea5ca741c1b99c3d4be18f11fbfda8a80b7"
+    },
+    "offers": {
+      "row_count": 1407,
+      "sha256": "8a9f0115c606400dd8d0039a45272bace0f7e52288599346c950df0aeead8fc3",
+      "csv": "offers.csv",
+      "csv_sha256": "850e2f7247b17bb74ab30cab1ef4bd6981d278ee73ab340cbcb0fd71a200cad9"
+    },
+    "panel_members": {
+      "row_count": 600,
+      "sha256": "747e99652fc5f2a10101208adbde1f424537907ef8011e3a8db84776e9f55284",
+      "csv": "panel_members.csv",
+      "csv_sha256": "e85ed616aefac5f7c147567d836683f11ffb0e7a7fae5f0596c5fd405db6458e"
+    },
+    "requisitions": {
+      "row_count": 200,
+      "sha256": "b422d5860532fd8efb8f5f9131a440c4a8b30e55c2aff82d7a203dfaabc22b4a",
+      "csv": "requisitions.csv",
+      "csv_sha256": "a903ccb9abbdbfd53f7b464534e1e90db655a0dfb256a3ff134c465a3a5a8f48"
+    },
+    "scorecards": {
+      "row_count": 1200,
+      "sha256": "550a0e5720f16f0c63e9aff912bb9d2eba8640fa73427742046113cb9c8748f6",
+      "csv": "scorecards.csv",
+      "csv_sha256": "243f7751b0efe667eaba6d6c7826797d798a05f591147d0c972bdee7d864d591"
+    },
+    "skill_requirements": {
+      "row_count": 1000,
+      "sha256": "023e6b7e145af59cf0b0bcae48a946ee870d92e60b7cd1a4af09e63b51e06e03",
+      "csv": "skill_requirements.csv",
+      "csv_sha256": "9e4f7ea7143a119857ff9e960029a9647e4296577b22508feced3a9637abc3bd"
+    },
+    "users": {
+      "row_count": 16,
+      "sha256": "1ddae8fd5f1013a376e97fd2a93fe992998cb170c1f1263475bd1c8eddd3c10f",
+      "csv": "users.csv",
+      "csv_sha256": "5483fc377860dd930b49e059d7328306d3a557775e5162f4c11dd7626f655563"
+    }
+  },
+  "files": {
+    "data.json": "9ee6a71a25cc1f2e3c750bbde74e79a4fdee1f9375963305a506bd915890369b",
+    "seed.sql": "9bc41182803bc764121f483c96621ad02f1921fd37a06af40e64fc89daeb7af7"
+  }
+}
