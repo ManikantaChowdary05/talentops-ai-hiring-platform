@@ -43,17 +43,20 @@ class DataQualityValidator:
         
         # 8. Scorecard completeness
         self._check_scorecard_completeness()
+
+        # 9. Approved evaluation criteria (R008)
+        self._check_evaluation_criteria_relevance()
         
-        # 9. Weighted score calculation
+        # 10. Weighted score calculation
         self._check_weighted_scores()
         
-        # 10. Approval consistency
+        # 11. Approval consistency
         self._check_approval_consistency()
         
-        # 11. Duplicate detection
+        # 12. Duplicate detection
         self._check_duplicate_records()
         
-        # 12. Reproducibility
+        # 13. Reproducibility
         self._check_reproducibility()
 
         total_checks = len(self.checks)
@@ -181,15 +184,35 @@ class DataQualityValidator:
         )
 
     def _check_interview_conflicts(self):
-        conflicts = self.db.query(Interview).filter(Interview.test_mode_conflict == True).count()
-        total_ints = self.db.query(Interview).count()
+        # Compute overlap from actual shared panel members, not a test flag.
+        interviews = (
+            self.db.query(Interview)
+            .filter(Interview.status != "Cancelled")
+            .order_by(Interview.scheduled_start.asc())
+            .all()
+        )
+        conflicts = set()
+        for index, first in enumerate(interviews):
+            first_members = {m.user_id for m in first.panel.members} if first.panel else set()
+            if not first_members:
+                continue
+            for second in interviews[index + 1:]:
+                if second.scheduled_start >= first.scheduled_end:
+                    break
+                second_members = {m.user_id for m in second.panel.members} if second.panel else set()
+                if (first_members & second_members
+                        and first.scheduled_start < second.scheduled_end
+                        and second.scheduled_start < first.scheduled_end):
+                    conflicts.add(second.interview_id)
+
+        total_ints = len(interviews)
         self._add_check(
             "Interview Conflict Validation (R006)",
             "Scheduling Protections",
-            "ANOMALY_DETECTED" if conflicts > 0 else "PASS",
-            f"Conflict inspector detected {conflicts} labelled test conflicts out of {total_ints} scheduled interviews.",
+            "ANOMALY_DETECTED" if conflicts else "PASS",
+            f"Computed {len(conflicts)} overlapping assignments from shared panel members across {total_ints} active interviews.",
             total_ints,
-            conflicts
+            len(conflicts)
         )
 
     def _check_application_lifecycle(self):
@@ -228,6 +251,29 @@ class DataQualityValidator:
             f"Validated completeness across {len(scorecards)} evaluation scorecards; all 5 dimensions scored 1-5.",
             len(scorecards),
             incomplete
+        )
+
+    def _check_evaluation_criteria_relevance(self):
+        scorecards = self.db.query(Scorecard).all()
+        violations = 0
+        for scorecard in scorecards:
+            comments = scorecard.feedback_comments or ""
+            marker = "Unapproved criteria:"
+            criteria = ["technical_knowledge", "problem_solving", "communication",
+                        "role_specific_skills", "collaboration"]
+            if marker in comments:
+                supplied = comments.split(marker, 1)[1].strip().split("|", 1)[0]
+                criteria.extend(item.strip() for item in supplied.split(",") if item.strip())
+            result = rules_engine.evaluate_r008_evaluation_criteria_relevance(criteria)
+            if result.decision == "BLOCK":
+                violations += 1
+        self._add_check(
+            "Approved Evaluation Criteria (R008)",
+            "Evaluation Governance",
+            "ANOMALY_DETECTED" if violations else "PASS",
+            f"Inspected {len(scorecards)} scorecards for criteria outside the approved five-pillar rubric.",
+            len(scorecards),
+            violations
         )
 
     def _check_weighted_scores(self):
@@ -284,13 +330,17 @@ class DataQualityValidator:
         )
 
     def _check_reproducibility(self):
+        # Full generated-output equality is tested by test_reproducibility.py.
+        from backend.synthetic.generator import generator
+        configured_seed = getattr(generator, "seed", None)
+        passed = configured_seed == 20261022
         self._add_check(
-            "Fixed-Seed Reproducibility",
+            "Fixed-Seed Configuration",
             "Determinism",
-            "PASS",
-            "Deterministic pseudo-random state verified against seed 20261022.",
+            "PASS" if passed else "FAIL",
+            f"Configured seed: {configured_seed}. Full output checksums are compared by the reproducibility test.",
             1,
-            0
+            0 if passed else 1
         )
 
     def _export_reports(self, summary: Dict[str, Any]):
